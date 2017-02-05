@@ -31,10 +31,48 @@ ubuntu15.10下使用**mysql**数据库进行数据的存储
         constraint c_fk foreign key(id) references login(id)  
         )charset=utf8;
 * 个人关系表(user_relationship)
-    <--无法添加外键，不知道为什么--!>
+    <!--无法添加外键，不知道为什么-->
     * 属性：  
     * sql创建语句：create table user_relationship(  
         id int primary key not null unique auto_increment,  
         user_id int unsigned not null,  
-        target_user_id int unsigned not null  
+        target_user_id int unsigned not null,  
+        foreign key(user_id) references login(id) on update cascade on delete cascade,  
+        foreign key(target_user_id) references login(id) on update cascade on delete cascade  
         )charset=utf8;  
+* 群组信息表(groupinfo)
+    * 属性：  
+    * sql创建语句：create table groupinfo(  
+        id int not null auto_increment unique primary key,  
+        announcement varchar(30) not null  
+        )charset=utf8;  
+* 群组关系表(group_relationship)
+    * 属性：  
+    * sql创建语句：create table group_relationship(  
+        id int not null auto_increment unique primary key,  
+        group_id int unique,  
+        user_id int unique,  
+        foreign key(group_id) references groupinfo(id) on update cascade on delete cascade,  
+        foreign key(user_id) references login(id) on update cascade on delete cascade  
+        )charset=utf8;  
+* 钱包表(money)
+    * 属性：  
+    * sql创建语句：create table money(  
+        id int not null primary key unique,  
+        balance int not null default 0,  
+        foreign key(id) references login(id) on update cascade on delete cascade  
+        )charset=utf8;  
+* 红包表(red_package)
+    * 属性：  
+    * sql创建语句：create table red_package(  
+        user_id int,  
+        red_package_time datetime,  
+        type tinyint,  
+        num int unsigned,  
+        money int,  
+        primary key(user_id,red_package_time),  
+        foreign key(user_id) references login(id) on update cascade on delete cascade  
+        )charset=utf8;  
+
+### 3.3数据库使用的错误及解决方法
+1. 创建外键时，主表的属性名不能相同，如果外键的两个属性都受主表同一个属性约束，则必须使用两条外键创建语句(例子:3.2 个人关系表);  
