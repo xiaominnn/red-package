@@ -124,7 +124,7 @@ public:
      * 函数参数：领取/发送红包id，领取/发送时间，红包类型
      * 函数参数：红包被分的数量，金额，发送红包id
      */
-    bool insert_red_package(unsigned int user_id, std::string datetime, unsigned short type, unsigned int num, float money, unsigned int send_id);
+    bool insert_red_package(unsigned int user_id, std::string datetime, unsigned short type, unsigned int num, int money, unsigned int send_id);
     /*
      * 函数功能：删除红包
      * 函数参数：用户id，创建时间

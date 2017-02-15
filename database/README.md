@@ -58,6 +58,9 @@ ubuntu15.10下使用**mysql**数据库进行数据的存储
         foreign key(group_id) references groupinfo(id) on update cascade on delete cascade,  
         foreign key(user_id) references login(id) on update cascade on delete cascade  
         )charset=utf8;  
+    * 对表属性进行修改  
+        * 修改group_id，去掉其唯一性约束：alter table group_relationship drop index group_id;(必须先删除所有外键)  
+        * 修改user_id，去掉其唯一性约束：alter table group_relationship drop index user_id;(必须先删除所有外键)  
 * 钱包表(money)
     * 属性：  
     * sql创建语句：create table money(  
