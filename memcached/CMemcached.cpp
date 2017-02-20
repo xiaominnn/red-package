@@ -42,13 +42,15 @@ CMemcached::~CMemcached()
  */
 std::string CMemcached::get_key(std::string key)
 {
-    std::string value = memcached_get(memc_con,key.c_str(),key.length(),NULL,NULL,&memc_res);
+    /*若memcached_get查询无结果，则返回NULL*/
+    char *value = memcached_get(memc_con,key.c_str(),key.length(),NULL,NULL,&memc_res);
     if(memc_res == MEMCACHED_SUCCESS)
         /*查询成功*/
     {
         return value;
     }
     else
+        /*未找到或者错误*/
     {
         return "";
     }
