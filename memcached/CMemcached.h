@@ -6,6 +6,7 @@
 
 #include <libmemcached/memcached.h>
 #include <string>
+#include <sstream>
 #include <iostream>
 
 class CMemcached

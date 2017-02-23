@@ -89,14 +89,14 @@ int main()
     {
         std::cout << "user_id:11 is member of group:5!" << std::endl;
     } */
-    /* if(dataAccess->insert_red_package(10,"2017-2-15 15:18:00",1,5,10,10))
+    if(dataAccess->insert_red_package(10,"2017-2-15 15:18:00",1,5,10,10))
     {
         std::cout << "insert red package success!" << std::endl;
-    } */
+    } 
     if(dataAccess->delete_red_package(10,"2017-2-15 15:18:00"))
     {
         std::cout << "delete red package success!" << std::endl;
-    }
+    } 
 
     return 0;
 }

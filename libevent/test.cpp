@@ -1,3 +1,7 @@
+/*
+ * 编译命令：
+ * g++ -o test test.cpp  CLibevent.cpp CLibevent.h -g -levent
+ */
 #include "CLibevent.h"
 #include <arpa/inet.h>
 

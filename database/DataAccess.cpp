@@ -475,6 +475,15 @@ bool DataAccess::insert_red_package(unsigned int user_id, std::string datetime, 
     mystream4 >> string_money;
     mystream5 << send_id;
     mystream5 >> string_send_id;
+
+    /*查询是否已经存在，若存在，在返回false*/
+    std::string query_statement = std::string("select * from red_package where user_id=") + string_user_id
+        + " and red_package_time=\'" + datetime + "\';";
+    if(this->query(query_statement) != "")
+    {
+        return false;
+    }
+    /*插入红包*/
     std::string insert_statement = std::string("insert into red_package")
         + "(user_id,red_package_time,type,num,money,send_id)"
         + " values(" + string_user_id + ",\'" + datetime + "\',"
