@@ -15,20 +15,21 @@ class BaseJob : public CJob
 {
 public:
     /*
-     * 对消息进行解析，解析出消息类型
-     */
-    bool prase_message(std::string message_content);
-    /*
      * 注册消息处理函数：message_register=1(消息类型值)
      */
-    bool register_message(std::string message_content);
+    bool register_message(std::string *message_content);
     /*
      * 登陆消息处理函数：message_login=2(消息类型值)
      */
-    bool login_message(std::string message_content);
+    bool login_message(std::string *message_content);
     /*
      * 消息处理运行函数
      */
     virtual void run(void *jobdata);
+private:
+    /*
+     * 对消息进行解析，解析成json类型
+     */
+    static bool prase_message_json(void *jobdata,const Json::Value &json_message);
 };
 #endif

@@ -42,10 +42,13 @@ void RPEventHandle::do_read(bufferevent *bev, void *args)
     {
         message[n] = '\0';
         std::cout << "fd = " << fd << ",read message:" << message << std::endl;
-        bufferevent_write(bev, message, num_char);
+        //bufferevent_write(bev, message, num_char);
     }
+    /*设置传递参数中的消息参数指针*/
+    std::string *string_message = new std::string(message);/*必须用new开辟，否则对象生命周期到的时候，消息也随着消亡*/
+    argument->set_message(string_message);
     /*调用线程池处理消息*/
-    thread_manage->run(, message);
+    thread_manage->run(, args);
 }
 /*
  * 函数功能：事件可写处理函数
